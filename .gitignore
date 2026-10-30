@@ -6,3 +6,4 @@ Thumbs.db
 *.zip
 .qa/
 dist/__qa*
+.openai/

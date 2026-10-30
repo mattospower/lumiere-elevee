@@ -12,6 +12,8 @@ HTML, CSS e JavaScript puros; Git para versionamento. Não há frameworks, bibli
 
 O diretório `dist/` contém o próprio site, editável e pronto para servir. O nome foi mantido para preservar a configuração de hospedagem existente.
 
+A pasta `.openai/` pertence à configuração da hospedagem privada e fica fora deste repositório. Ela não é necessária para executar o site com Live Server ou com o servidor local abaixo.
+
 1. Abra a pasta do projeto no VS Code.
 2. Use **Live Server** em `dist/index.html`.
 3. Alternativamente, com Python instalado, execute na raiz:
