@@ -1,0 +1,9 @@
+# Arquivos locais e materiais de apoio dispensáveis no envio pela Vercel CLI.
+.openai/
+.qa/
+dist/__qa*
+historico.bundle
+*.md
+*.zip
+*.tar.gz
+*.log

@@ -24,6 +24,12 @@ python -m http.server 8080 --directory dist
 
 Abra `http://localhost:8080`. Depois de obter os arquivos, esse servidor funciona sem internet: as imagens, fontes e scripts são locais. Abra por um servidor local; o duplo clique em `index.html` pode bloquear os módulos JavaScript por usar o protocolo `file://`.
 
+## Preparação para a Vercel
+
+O repositório inclui `vercel.json`, configurado para servir `dist/` com o preset `Other`, sem instalar pacotes ou executar uma compilação. Importe `mattospower/lumiere-elevee` mantendo a raiz do repositório como **Root Directory**. Consulte [VERCEL.md](VERCEL.md) para as opções do painel, a navegação e a proteção de acesso antes de publicar.
+
+A configuração da Vercel não depende de `.openai/`. A hospedagem privada existente permanece independente desta preparação.
+
 ## Funcionalidades
 
 - 18 produtos em seis coleções, com três produtos por coleção.
@@ -76,6 +82,10 @@ README.md
 EXPLICACAO.md
 AUDITORIA.md              # diagnóstico inicial preservado
 RELATORIO_FINAL.md        # critérios, verificações e pendências
+PUBLICACAO_GITHUB.md      # importação e histórico original
+VERCEL.md                 # importação e configuração na Vercel
+vercel.json               # publicação estática de dist/
+.vercelignore             # exclusões nos envios pela CLI
 ```
 
 As cinco imagens de produtos e o banner originais foram preservados. Os treze produtos complementares usam SVGs locais identificados como visuais conceituais. Conteúdos de fórmulas, benefícios e avaliações são ilustrativos do projeto, sem oferta comercial.
