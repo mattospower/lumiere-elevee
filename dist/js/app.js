@@ -101,7 +101,8 @@ const icone = (n) => `<svg class='icon' viewBox='0 0 24 24' aria-hidden='true'>
 </svg>`;
 function botaoTema(cls = "") {
   const dark = document.documentElement.dataset.theme === "dark";
-  return `<button class='icon-button ${cls}' data-action='theme' aria-label='Ativar modo ${dark ? "claro" : "escuro"}' title='Alternar tema'>${icone(dark ? "sun" : "moon")}<span class='theme-label'>MODO ${dark ? "CLARO" : "ESCURO"}</span>
+  const acao = `Ativar modo ${dark ? "claro" : "escuro"}`;
+  return `<button class='icon-button theme-toggle ${cls}' data-action='theme' aria-label='${acao}' title='${acao}'>${icone(dark ? "sun" : "moon")}
 </button>`;
 }
 /* Atualiza cabeçalho, contador da sacola, rodapé e navegação mobile. */
@@ -119,12 +120,12 @@ function renderizarEstrutura() {
 <button class='icon-button' data-action='search' aria-label='Pesquisar'>${icone("search")}</button>
 <a href='#/conta'>Conta</a>
 <a href='#/favoritos' aria-label='Favoritos'>${icone("heart")}</a>
-<a href='#/sacola'>Sacola (<span data-cart-count>${contarItens()}</span>)</a>${botaoTema()}</div>
+<a href='#/sacola' class='cart-link' aria-label='Sacola (${contarItens()})'>${icone("bag")}<span>Sacola (<span data-cart-count>${contarItens()}</span>)</span></a>${botaoTema()}</div>
 <a class='icon-button mobile-only' href='#/sacola' aria-label='Sacola, ${contarItens()} itens'>${icone("bag")}<small data-cart-count>${contarItens()}</small>
 </a>
 </div>
 </header>
-<div class='mobile-only'>${botaoTema("theme-float btn outline")}</div>`;
+<div class='mobile-only'>${botaoTema("theme-float")}</div>`;
   selecionar("#mobile-nav").innerHTML = [
     ["/", "home", "Início"],
     ["/colecoes", "grid", "Coleções"],
@@ -168,7 +169,7 @@ function renderizarEstrutura() {
 <div class='footer-bottom'>
 <span>© 2026 Lumière Élevée. Todos os direitos reservados.</span>
 <span>
-<a href='#/privacidade'>Privacidade</a> · <a href='#/termos'>Termos</a> · <button class='text-link' style='color:inherit;font-size:11px' data-action='theme'>Alternar tema</button>
+<a href='#/privacidade'>Privacidade</a> · <a href='#/termos'>Termos</a> · ${botaoTema("footer-theme")}
 </span>
 </div>
 </footer>`;

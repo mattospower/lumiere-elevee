@@ -202,15 +202,36 @@ button:disabled {
   width: 17px;
   height: 17px;
 }
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+}
+.header-actions .cart-link .icon,
+.header-actions .theme-toggle .icon {
+  width: 20px;
+  height: 20px;
+}
 .desktop-nav a.active {
   border-bottom: 1px solid var(--ink);
 }
 .mobile-only {
   display: none;
 }
-.theme-label {
-  font-size: 10px;
-  letter-spacing: 0.5px;
+.theme-toggle {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 50%;
+}
+.theme-toggle:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+.footer-theme {
+  vertical-align: middle;
 }
 .theme-float {
   display: none;
@@ -657,6 +678,7 @@ button:disabled {
   margin: 40px auto 0;
   padding-top: 22px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 20px;
   font-size: 11px;
@@ -1512,9 +1534,6 @@ dialog::backdrop {
   .header-inner .wordmark {
     font-size: 21px;
   }
-  .theme-label {
-    display: none;
-  }
   .product-layout {
     gap: 30px;
   }
@@ -1562,9 +1581,6 @@ dialog::backdrop {
   .theme-float {
     display: inline-flex;
     margin: 16px 20px 0;
-    font-size: 10px;
-    padding: 10px 16px;
-    min-height: 44px;
   }
   .section {
     padding: 42px 20px;
@@ -1876,6 +1892,7 @@ dialog::backdrop {
   }
   .footer-bottom {
     flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
     margin-top: 28px;
   }
@@ -2111,12 +2128,6 @@ dialog::backdrop {
   object-fit: contain;
 }
 @media (max-width: 800px) {
-  .theme-float .theme-label {
-    display: inline;
-  }
-  .theme-float {
-    min-width: 165px;
-  }
   .hero-image {
     object-fit: contain;
   }
