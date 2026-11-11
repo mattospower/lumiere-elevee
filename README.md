@@ -2,7 +2,7 @@
 
 Projeto acadêmico de Criação de Sites com identidade própria de skincare de luxo. Simula a navegação por produtos, a sacola e o processo completo de compra, sem cobrança ou entrega real.
 
-Site privado: https://lumiere-elevee.fuzzypoppy132.chatgpt.site
+https://lumiere-elevee-ebog.vercel.app/
 
 O acesso à hospedagem exige a conta ChatGPT autorizada. O login dentro da loja é uma conta de demonstração, independente dessa proteção. O site não foi disponibilizado publicamente.
 
