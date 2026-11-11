@@ -1,14 +1,7 @@
-// Validações didáticas: não há banco, API de pagamento, CPF real ou análise de crédito.
-export const exemploCliente = {
-  name: "Isabella Martins",
-  email: "isabella@example.com",
-  phone: "(00) 00000-0000",
-  cpf: "000.000.000-00",
-  cep: "00000-000",
-  address: "Rua Exemplo, 100",
-  city: "Cidade Exemplo",
-  state: "RS",
-};
+// Campos e validações locais do checkout. A cobrança depende de um provedor de pagamento.
+export const camposCliente = [
+  "name", "email", "phone", "cpf", "cep", "address", "city", "state",
+];
 
 export const dadosIniciaisCheckout = {
   name: "",
@@ -22,7 +15,7 @@ export const dadosIniciaisCheckout = {
   terms: false,
   payment: "Cartão de crédito",
   parcelas: 6,
-  shipping: "Padrão demonstrativo",
+  shipping: "Envio padrão",
   assinaturaValidada: "",
 };
 
@@ -66,7 +59,7 @@ export const estados = [
 export function restaurarCheckout(dados) {
   const resultado = { ...dadosIniciaisCheckout };
   if (!dados || typeof dados !== "object") return resultado;
-  for (const campo of Object.keys(exemploCliente)) {
+  for (const campo of camposCliente) {
     if (typeof dados[campo] === "string")
       resultado[campo] = dados[campo].slice(0, 160);
   }
@@ -88,42 +81,24 @@ export function restaurarCheckout(dados) {
 export function validarCliente(dados) {
   const erros = {};
   if (dados.name.trim().length < 3)
-    erros.name = "Informe um nome fictício com pelo menos 3 caracteres.";
+    erros.name = "Informe seu nome com pelo menos 3 caracteres.";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email.trim()))
     erros.email =
-      "Informe um e-mail de exemplo válido, como cliente@example.com.";
+      "Informe um e-mail válido, como nome@exemplo.com.";
   if (!/^\d{10,11}$/.test(dados.phone.replace(/\D/g, "")))
-    erros.phone = "Informe um telefone fictício com DDD e 10 ou 11 dígitos.";
-  if (dados.cpf.replace(/\D/g, "") !== "00000000000")
-    erros.cpf = "Nesta simulação, use apenas o CPF fictício 000.000.000-00.";
+    erros.phone = "Informe um telefone com DDD e 10 ou 11 dígitos.";
+  if (!/^\d{11}$/.test(dados.cpf.replace(/\D/g, "")))
+    erros.cpf = "Informe um CPF com 11 dígitos.";
   if (!/^\d{8}$/.test(dados.cep.replace(/\D/g, "")))
-    erros.cep = "Informe um CEP fictício com 8 dígitos, como 00000-000.";
+    erros.cep = "Informe um CEP com 8 dígitos.";
   if (dados.address.trim().length < 5)
     erros.address =
-      "Informe um endereço de exemplo com pelo menos 5 caracteres.";
+      "Informe o endereço com pelo menos 5 caracteres.";
   if (dados.city.trim().length < 2)
-    erros.city = "Informe uma cidade de exemplo.";
+    erros.city = "Informe sua cidade.";
   if (!estados.includes(dados.state)) erros.state = "Selecione um estado.";
   if (!dados.terms)
     erros.terms =
-      "Marque que leu os termos e entendeu que esta compra é simulada.";
+      "Leia e aceite os Termos de Uso para continuar.";
   return erros;
-}
-
-// Aceitamos apenas o número e o CVV de demonstração; não fazemos validação bancária.
-export function validarCartao(dados) {
-  const erros = {};
-  if (!/^(0000 ){3}0000$/.test(dados.numero.trim()))
-    erros.numero = "Use somente o número fictício 0000 0000 0000 0000.";
-  if (dados.nome.trim().length < 3)
-    erros.nome = "Informe um nome fictício com pelo menos 3 caracteres.";
-  if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(dados.validade.trim()))
-    erros.validade = "Use o formato MM/AA, por exemplo 12/30.";
-  if (dados.cvv !== "000") erros.cvv = "Use somente o CVV fictício 000.";
-  return erros;
-}
-
-// O texto não segue o padrão de um Pix real e não permite transferência.
-export function criarCodigoPix(totalCentavos) {
-  return `LUMIERE-DEMO-SEM-VALOR-${totalCentavos}-NAO-PAGAR`;
 }

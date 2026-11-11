@@ -1,13 +1,11 @@
 // Interface e navegação da loja. As regras financeiras ficam em carrinho.js.
 import {
-  exemploCliente,
+  camposCliente,
   dadosIniciaisCheckout,
   metodosPagamento,
   estados,
   restaurarCheckout,
   validarCliente,
-  validarCartao,
-  criarCodigoPix,
 } from "./pagamentos.js";
 import {
   formatarPreco,
@@ -142,7 +140,7 @@ function renderizarEstrutura() {
 <div class='footer-brand'>
 <a href='#/' class='wordmark'>LUMIÈRE ÉLEVÉE</a>
 <p>Elevando o cuidado diário a uma forma de arte, através da ciência botânica.</p>
-<p>Projeto demonstrativo privado.<br>Sem vendas ou cobranças reais.</p>
+
 </div>
 <div>
 <h3>A MAISON</h3>
@@ -163,7 +161,7 @@ function renderizarEstrutura() {
 <a href='#/privacidade'>Política de Privacidade</a>
 <a href='#/termos'>Termos de Uso</a>
 <a href='#/ajuda'>Formas de Pagamento</a>
-<button class='text-link' style='color:#d9d6ce;font-size:12px;margin-top:10px' data-action='reset'>Redefinir demonstração</button>
+<button class='text-link' style='color:#d9d6ce;font-size:12px;margin-top:10px' data-action='reset'>Limpar dados</button>
 </div>
 </div>
 <div class='footer-bottom'>
@@ -234,16 +232,16 @@ function botaoFavorito(p) {
 }
 /* Reutiliza a mesma apresentação dos produtos na home, catálogo e favoritos. */
 function cartaoProduto(p) {
-  return `<article class='product-card'>${botaoFavorito(p)}<a class='product-photo' href='#/produto/${p.id}'>${imagem(p.image, p.name + (p.ilustrativo ? " — imagem conceitual" : " — imagem original do projeto"))}</a>
+  return `<article class='product-card'>${botaoFavorito(p)}<a class='product-photo' href='#/produto/${p.id}'>${imagem(p.image, p.name)}</a>
 <a href='#/produto/${p.id}'>
 <h3>${p.name}</h3>
 </a>
 <p>${p.subtitle}</p>
 <span class='chip'>ATIVO: ${p.active}</span>${
     p.reviews
-      ? `<span class='rating' aria-label='Avaliação ilustrativa ${p.rating} de 5'>★★★★★ <small>(${p.reviews})</small>
+      ? `<span class='rating' aria-label='Avaliação ${p.rating} de 5'>★★★★★ <small>(${p.reviews})</small>
 </span>`
-      : `<span class='fine'>Produto demonstrativo</span>`
+      : ``
   }<span class='price'>${p.precoAnteriorCentavos ? `<span class='old-price'>${precoFormatado(p.precoAnteriorCentavos)}</span>` : ""}${precoFormatado(p.precoCentavos)}</span>
 <p class='fine'>${descreverParcelas(p.precoCentavos, p.precoCentavos < 40000 ? 3 : 6)}</p>
 <button class='btn' data-action='add' data-id='${p.id}'>ADICIONAR À SACOLA</button>
@@ -364,7 +362,7 @@ function telaInicial() {
 <p style='margin-top:14px'>
 <span style='font:500 30px var(--serif);color:var(--ink)'>4.9</span> <span class='rating'>★★★★★</span>
 </p>
-<p class='fine'>Avaliações ilustrativas preservadas do protótipo.</p>
+
 </div>
 <div class='review-grid'>${[
     [
@@ -418,14 +416,9 @@ function telaInicial() {
 </div>
 </section>
 <section class='newsletter'>
-<h2>Junte-se ao Nosso Círculo</h2>
-<p>Receba lançamentos exclusivos, guias de rituais e convites para eventos privados.</p>
-<form id='newsletter-form'>
-<label class='sr-only' for='newsletter-email' style='position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden'>Seu melhor e-mail</label>
-<input id='newsletter-email' type='email' placeholder='Seu melhor e-mail' required autocomplete='off'>
-<button class='btn gold' type='submit'>INSCREVER-SE</button>
-</form>
-<p class='fine' style='font-size:10px'>Inscrição demonstrativa. Nenhum e-mail será enviado ou armazenado.</p>
+<h2>Descubra seu próximo ritual</h2>
+<p>Explore a coleção e encontre novos favoritos para o seu cuidado diário.</p>
+<a class='btn gold' href='#/catalogo?ordem=novidades'>EXPLORAR NOVIDADES</a>
 </section>
 </div>`;
 }
@@ -528,26 +521,26 @@ function telaProduto(id) {
   tamanhoSelecionado = p.size;
   const c = categorias.find((c) => c.id === p.category);
   return `<div class='container'>${caminhoPagina(p.name, c)}<div class='product-layout'>
-<div>${imagem(p.image, p.name + (p.ilustrativo ? " — imagem conceitual" : " — embalagem original do projeto"), "product-main-image", false)}<div class='gallery-thumbs'>
+<div>${imagem(p.image, p.name, "product-main-image", false)}<div class='gallery-thumbs'>
 <button data-action='zoom' data-id='${p.id}' aria-label='Ampliar imagem de ${p.name}'>${imagem(p.image, p.name)}</button>
 <button data-action='ritual-image' aria-label='Ver o ritual completo'>${imagem("ritual", "Ritual completo")}</button>
 </div>
-<p class='fine' style='margin-top:10px'>${p.ilustrativo ? "Imagem local ilustrativa" : "Imagem original do projeto"} · produto conceitual.</p>
+
 </div>
 <div class='product-info'>
-<span class='stock'>EM ESTOQUE · DEMONSTRAÇÃO</span>
+<span class='stock'>NA COLEÇÃO LUMIÈRE</span>
 <h1>${p.name}</h1>
 <p>${p.subtitle}</p>${
     p.reviews
-      ? `<div class='rating'>★★★★★ <small>${p.rating} · ${p.reviews} avaliações ilustrativas</small>
+      ? `<div class='rating'>★★★★★ <small>${p.rating} · ${p.reviews} avaliações</small>
 </div>`
-      : `<p class='fine'>Produto demonstrativo · visual conceitual</p>`
+      : ``
   }<div class='price-block'>${p.precoAnteriorCentavos ? `<span class='old-price'>${precoFormatado(p.precoAnteriorCentavos)}</span>` : ""}<strong>${precoFormatado(p.precoCentavos)}</strong>
 <p>${descreverParcelas(p.precoCentavos, p.precoCentavos < 40000 ? 3 : 6)}</p>
 </div>
 <p class='options-label'>SELECIONE ${p.id.includes("ampola") ? "A OPÇÃO" : "O TAMANHO"}</p>
 <div class='options' role='group' aria-label='Tamanho do produto'>${p.options.map((s) => `<button class='option ${s === p.size ? "selected" : ""}' aria-pressed='${s === p.size}' data-action='size' data-size='${s}'>${s}</button>`).join("")}</div>
-<p class='fine' style='margin-top:8px'>Opções visuais do protótipo; preço demonstrativo mantido.</p>
+
 <div class='purchase'>
 <div class='quantity'>
 <button data-action='product-minus' aria-label='Diminuir quantidade'>−</button>
@@ -559,12 +552,12 @@ function telaProduto(id) {
 <button class='text-link' data-action='routine' data-id='${p.id}'>${rotina.includes(p.id) ? "✓ Na Minha Rotina" : "+ Adicionar à Minha Rotina"}</button>
 <ul class='service-list'>
 <li>Frete grátis em compras acima de R$450</li>
-<li>Embalagens e fórmulas conceituais da coleção</li>
-<li>Compra demonstrativa, sem cobrança ou envio</li>
+<li>Cuidados para compor seu ritual</li>
+<li>Salve seus favoritos e organize sua rotina</li>
 </ul>
 <p class='options-label'>ATIVOS PRINCIPAIS</p>
 <div class='active-chips'>${p.actives.map((a) => `<span class='chip'>${a}</span>`).join("")}</div>
-<p class='fine'>Conteúdo de produto reproduzido do projeto. Não representa uma oferta comercial.</p>
+
 </div>
 </div>
 <div class='product-details'>
@@ -591,11 +584,11 @@ function telaProduto(id) {
 <h2>Perguntas Frequentes</h2>
 <details>
 <summary>Como funciona esta experiência?</summary>
-<p>Você pode explorar os produtos, salvar favoritos, montar sua rotina e simular um pedido. Nenhuma compra, cobrança ou entrega é realizada.</p>
+<p>Explore os produtos, salve favoritos, organize sua rotina e prepare um pedido pela sacola.</p>
 </details>
 <details>
-<summary>Os produtos e as avaliações são reais?</summary>
-<p>São conteúdos conceituais e ilustrativos do projeto Lumière Élevée. As informações de fórmulas e resultados precisam de validação antes de uso comercial.</p>
+<summary>Onde encontro os detalhes de cada cuidado?</summary>
+<p>Cada página reúne descrição, tamanhos, ingredientes e orientações para você conhecer melhor o cuidado escolhido.</p>
 </details>
 <details>
 <summary>Posso alterar o tamanho na sacola?</summary>
@@ -644,9 +637,7 @@ function telaDocumento(type) {
 <article class='legal'>${caminhoPagina(l.title)}<span class='eyebrow'>INFORMAÇÕES / LUMIÈRE ÉLEVÉE</span>
 <h1>${l.title}</h1>
 <p class='lead'>${l.lead}</p>
-<div class='notice'>
-<strong>Sobre esta versão privada</strong>
-<br>Textos institucionais do protótipo. Esta demonstração não vende produtos, não processa pagamentos nem envia e-mails. O login é simulado. ${type === "privacidade" ? "Tema, sacola, favoritos, rotina e último pedido de exemplo ficam neste navegador. Nome de exibição, e-mail demo e rascunho do checkout ficam apenas na sessão. Número, validade e CVV dos cartões não são armazenados; senhas também não são armazenadas. Não há ferramentas de análise ou rastreamento no código do site. A hospedagem privada controla o acesso pela conta ChatGPT." : ""}</div>
+${type === "privacidade" ? `<div class='notice'>Suas preferências e a sacola são salvas neste navegador. O perfil e os dados de identificação ficam nesta sessão. Use o botão abaixo para remover esses dados.</div>` : ""}
 <nav class='legal-nav' aria-label='Seções do documento'>${l.sections.map(([t], i) => `<a href='#/${type}?secao=${i + 1}' class='text-link'>${t.split(". ")[1]}</a>`).join("")}</nav>${l.sections
     .map(
       ([t, p], i) => `<section class='legal-section' id='legal-${i + 1}'>
@@ -656,13 +647,13 @@ function telaDocumento(type) {
     )
     .join(
       "",
-    )}<p class='fine' style='margin-top:25px'>Versão do projeto · 28 de outubro de 2026 · Texto sujeito a revisão antes da operação comercial.</p>
+    )}<p class='fine' style='margin-top:25px'>Atualizado em 11 de novembro de 2026.</p>
 <div style='margin-top:25px'>
 <a class='text-link' href='#/${type === "termos" ? "privacidade" : "termos"}'>${type === "termos" ? "Política de Privacidade" : "Termos de Uso"} →</a>
-</div>${type === "privacidade" ? `<button class='btn outline' style='margin-top:24px' data-action='reset'>LIMPAR DADOS DESTA DEMONSTRAÇÃO</button>` : ""}</article>
+</div>${type === "privacidade" ? `<button class='btn outline' style='margin-top:24px' data-action='reset'>LIMPAR DADOS DESTE NAVEGADOR</button>` : ""}</article>
 </div>`;
 }
-/* Conta demonstrativa: não autentica em um servidor e não armazena senhas. */
+/* Organiza um perfil local, sem solicitar senha ou credenciais de terceiros. */
 function telaLogin(signup = false) {
   return `<div class='login-layout'>
 <aside class='brand-panel'>
@@ -670,55 +661,39 @@ function telaLogin(signup = false) {
 <div>
 <span class='eyebrow'>A ARTE DO AUTOCUIDADO</span>
 <h2>Seu ritual,<br>sua pele, seu tempo.</h2>
-<p>Acesse sua conta para acompanhar pedidos, salvar sua rotina e receber recomendações personalizadas.</p>
+<p>Organize seus favoritos, sua rotina e os pedidos salvos em um só lugar.</p>
 </div>
 </aside>
 <section class='login-panel'>
 <form id='login-form' autocomplete='off'>
 <div class='tabs'>
 <button type='button' data-action='login-tab' data-tab='entrar' class='${!signup ? "selected" : ""}'>Entrar</button>
-<button type='button' data-action='login-tab' data-tab='cadastro' class='${signup ? "selected" : ""}'>Conta demo</button>
+<button type='button' data-action='login-tab' data-tab='cadastro' class='${signup ? "selected" : ""}'>Criar perfil</button>
 </div>
-<p class='fine'>Acesso demonstrativo. Não utilize dados reais.</p>${
-    signup
-      ? `<div class='field'>
-<label for='demo-name'>NOME DE EXIBIÇÃO</label>
-<input id='demo-name' name='name' placeholder='Isabella' required minlength='2' maxlength='40' autocomplete='off'>
-</div>`
-      : ""
-  }<div class='field'>
-<label for='demo-email'>E-MAIL DE EXEMPLO</label>
-<input id='demo-email' name='email' type='email' value='isabella@example.com' required autocomplete='off'>
+<p class='fine'>Suas preferências ficam disponíveis neste navegador.</p>
+<div class='field'>
+<label for='login-name'>NOME DE EXIBIÇÃO</label>
+<input id='login-name' name='name' placeholder='Seu nome' required minlength='2' maxlength='40' autocomplete='off'>
 </div>
 <div class='field'>
-<label for='demo-password'>SENHA DEMONSTRATIVA</label>
-<div style='position:relative'>
-<input id='demo-password' name='password' type='password' placeholder='Use uma senha fictícia' required minlength='6' autocomplete='off' style='padding-right:70px'>
-<button type='button' class='text-link' data-action='password' style='position:absolute;right:13px;top:15px;font-size:10px' aria-label='Mostrar senha'>Mostrar</button>
-</div>
-<small class='fine'>Use “lumiere” para testar.</small>
+<label for='login-email'>E-MAIL</label>
+<input id='login-email' name='email' type='email' placeholder='nome@exemplo.com' required autocomplete='off'>
 </div>
 <div class='form-inline'>
 <label class='checkbox'>
 <input type='checkbox' name='remember'>Manter nesta sessão</label>
-<button type='button' class='text-link' data-action='recover'>Esqueci minha senha</button>
 </div>${
     signup
       ? `<label class='checkbox' style='margin-bottom:22px'>
 <input type='checkbox' required>Li os <a class='text-link' href='#/termos'>Termos de Uso</a>.</label>`
       : ""
-  }<button class='btn full' type='submit'>${signup ? "CRIAR CONTA DEMO" : "ENTRAR NA CONTA DEMO"}</button>
-<div class='or'>ou</div>
-<div class='social'>
-<button type='button' class='btn outline' data-action='social' data-provider='Google'>Simular Google</button>
-<button type='button' class='btn outline' data-action='social' data-provider='Apple'>Simular Apple</button>
-</div>
+  }<button class='btn full' type='submit'>${signup ? "SALVAR PERFIL" : "ACESSAR PERFIL"}</button>
 <p class='fine' style='margin-top:22px;font-size:10px'>Ao entrar, você concorda com os <a class='text-link' href='#/termos'>Termos de Uso</a> e a <a class='text-link' href='#/privacidade'>Política de Privacidade</a>.</p>
 </form>
 </section>
 </div>`;
 }
-/* Mostra o perfil de exemplo, o último pedido simulado e os cuidados salvos. */
+/* Mostra o perfil, o último pedido salvo e os cuidados favoritos. */
 function telaConta() {
   if (!usuario) return telaLogin();
   return `<section class='container'>${caminhoPagina("Minha Conta")}<div class='page-intro'>
@@ -738,19 +713,19 @@ function telaConta() {
         `<button data-action='account-tab' data-tab='${id}' class='${abaConta === id ? "selected" : ""}'>${label}</button>`,
     )
     .join("")}<a class='btn outline' href='#/favoritos'>Favoritos</a>
-<button data-action='logout'>Sair da conta demo</button>
+<button data-action='logout'>Sair da conta</button>
 </nav>
 <div class='account-content'>${
     abaConta === "perfil"
       ? `<h2>Meus dados</h2>
-<div class='notice'>Você está em uma conta demonstrativa. Use somente informações fictícias.</div>
+<p class='fine'>Seu perfil e suas preferências estão disponíveis nesta sessão.</p>
 <form id='profile-form'>
 <div class='field'>
 <label for='profile-name'>NOME DE EXIBIÇÃO</label>
 <input id='profile-name' name='name' value='${escaparHtml(usuario.name)}' minlength='2' maxlength='40' required>
 </div>
 <div class='field'>
-<label for='profile-email'>E-MAIL DEMONSTRATIVO</label>
+<label for='profile-email'>E-MAIL</label>
 <input id='profile-email' type='email' value='${escaparHtml(usuario.email)}' readonly>
 </div>
 <button class='btn' type='submit'>SALVAR ALTERAÇÕES</button>
@@ -758,9 +733,9 @@ function telaConta() {
       : abaConta === "pedidos"
         ? `<h2>Meus pedidos</h2>${
             ultimoPedido
-              ? `<div class='notice'>Pedido ${ultimoPedido.id} · Simulação concluída<br>${ultimoPedido.items.length} produtos · ${precoFormatado(ultimoPedido.total)}</div>
-<a href='#/confirmacao' class='btn outline'>VER SIMULAÇÃO</a>`
-              : `<p>Nenhum pedido simulado por aqui.</p>
+              ? `<div class='notice'>Pedido ${ultimoPedido.id} · Pagamento pendente<br>${ultimoPedido.items.length} produtos · ${precoFormatado(ultimoPedido.total)}</div>
+<a href='#/confirmacao' class='btn outline'>VER PEDIDO</a>`
+              : `<p>Nenhum pedido salvo por aqui.</p>
 <a href='#/catalogo' class='btn' style='margin-top:24px'>EXPLORAR COLEÇÃO</a>`
           }`
         : abaConta === "rotina"
@@ -771,7 +746,7 @@ function telaConta() {
 <p>Escolha a atmosfera do seu ritual.</p>
 <button class='btn outline' data-action='theme' style='margin-top:20px'>ALTERNAR MODO CLARO / ESCURO</button>
 <div class='notice'>Suas preferências ficam neste navegador. Você pode redefinir os dados a qualquer momento.</div>
-<button class='text-link' data-action='reset'>Redefinir demonstração</button>`
+<button class='text-link' data-action='reset'>Limpar dados</button>`
   }</div>
 </div>
 </section>`;
@@ -784,7 +759,7 @@ function salvarCheckout() {
 }
 function guardarDadosCliente(formulario) {
   if (!formulario) return;
-  for (const campo of Object.keys(exemploCliente)) {
+  for (const campo of camposCliente) {
     compra[campo] = formulario.elements[campo].value.trim();
   }
   compra.terms = formulario.elements.terms.checked;
@@ -854,7 +829,7 @@ function resumoPedido(button = true, review = false) {
 <span>${precoFormatado(subtotalCentavos())}</span>
 </div>
     <div class='summary-line'>
-<span>Frete demonstrativo</span>
+<span>Frete</span>
 <span>${freteCentavos() ? precoFormatado(freteCentavos()) : "Grátis"}</span>
 </div>
     <div class='summary-line'>
@@ -867,13 +842,13 @@ function resumoPedido(button = true, review = false) {
 </div>
     <p class='fine'>${compra.payment} · ${compra.payment === "Cartão de crédito" ? descreverParcelas(totalCentavos(), compra.parcelas) : precoFormatado(totalCentavos()) + " à vista"}</p>
     ${button ? `<a class='btn full' href='#/checkout'>CONTINUAR PARA CHECKOUT</a>` : ""}
-    <p class='fine summary-warning'>Simulação acadêmica. Nenhuma cobrança ou entrega será realizada.</p>
+
     ${
       review
         ? ""
         : `<form id='coupon-form' class='coupon'>
-      <label for='coupon-code' class='sr-only'>Cupom demonstrativo</label>
-      <input id='coupon-code' placeholder='Cupom demonstrativo' value='${cupomAtivo ? "LUMIERE10" : ""}'>
+      <label for='coupon-code' class='sr-only'>Cupom</label>
+      <input id='coupon-code' placeholder='Cupom' value='${cupomAtivo ? "LUMIERE10" : ""}'>
       <button type='submit' class='btn small outline'>APLICAR</button>
     </form>
 <button class='text-link' data-action='coupon-rules'>Ver regras de cupom</button>`
@@ -888,7 +863,7 @@ function renderizarCarrinho() {
 <h1>Seu ritual, em uma sacola.</h1>
 <p>Revise seus escolhidos antes de continuar.</p>
 </div>
-    <div class='notice'>SIMULAÇÃO ACADÊMICA · Utilize apenas dados fictícios. Nenhuma cobrança ou envio.</div>
+
     ${
       carrinho.length
         ? `<div class='cart-layout'>
@@ -923,7 +898,7 @@ function renderizarCarrinho() {
 <span style='width:${Math.min(100, (subtotalCentavos() / 45000) * 100)}%'>
 </span>
 </div>
-        <span class='fine'>Até 20 unidades por opção · condições demonstrativas.</span>
+        <span class='fine'>Até 20 unidades por opção.</span>
       </div>
       <a class='btn outline continue-shopping' href='#/catalogo'>CONTINUAR COMPRANDO</a>
     </div>${resumoPedido()}</div>`
@@ -931,7 +906,7 @@ function renderizarCarrinho() {
       <h2>Sua sacola está vazia.</h2>
 <p>Encontre os próximos passos do seu ritual.</p>
       <a class='btn' href='#/catalogo'>EXPLORAR COLEÇÃO</a>
-      <button class='btn outline sample-cart' data-action='sample-cart'>CARREGAR ITENS DE EXEMPLO</button>
+
     </div>`
     }
   </section>`;
@@ -941,29 +916,25 @@ function etapasCompra(etapa) {
     ${["IDENTIFICAÇÃO", "PAGAMENTO", "REVISÃO", "CONFIRMAÇÃO"].map((titulo, indice) => `<span class='${etapa === indice + 1 ? "active" : ""}' ${etapa === indice + 1 ? `aria-current='step'` : ""}>${indice + 1} · ${titulo}</span>`).join("")}
   </nav>`;
 }
-/* Apresenta os oito dados fictícios do cliente e os avisos de validação. */
+/* Apresenta os dados de identificação e entrega com validação por campo. */
 function telaCheckout() {
   if (!carrinho.length) return renderizarCarrinho();
   return `<section class='container'>${etapasCompra(1)}${caminhoPagina("Identificação e entrega")}
     <div class='page-intro'>
 <h1>Um passo mais perto do seu ritual.</h1>
-<p>Preencha os dados fictícios para continuar.</p>
+<p>Informe seus dados de identificação e entrega.</p>
 </div>
     <div class='cart-layout'>
       <form id='checkout-form' class='checkout-content' novalidate autocomplete='off'>
-        <div class='notice'>
-<strong>SIMULAÇÃO · NÃO UTILIZE DADOS REAIS</strong>
-<br>Use o botão abaixo para preencher informações de exemplo. O CPF aceito é 000.000.000-00.</div>
-        <button type='button' class='btn outline' data-action='fill-example'>PREENCHER DADOS FICTÍCIOS</button>
         <div class='form-errors' role='alert' hidden>
 </div>
         <h2>Identificação</h2>
-        <div class='form-row'>${campoCliente("name", "NOME FICTÍCIO")}${campoCliente("email", "E-MAIL DE EXEMPLO", "email", "cliente@example.com")}</div>
-        <div class='form-row'>${campoCliente("phone", "TELEFONE FICTÍCIO COM DDD", "tel", "(00) 00000-0000")}${campoCliente("cpf", "CPF FICTÍCIO", "text", "000.000.000-00")}</div>
+        <div class='form-row'>${campoCliente("name", "NOME COMPLETO")}${campoCliente("email", "E-MAIL", "email", "nome@exemplo.com")}</div>
+        <div class='form-row'>${campoCliente("phone", "TELEFONE COM DDD", "tel", "(00) 00000-0000")}${campoCliente("cpf", "CPF", "text", "000.000.000-00")}</div>
         <h2>Entrega</h2>
-        ${campoCliente("cep", "CEP FICTÍCIO", "text", "00000-000")}
-        ${campoCliente("address", "ENDEREÇO DE EXEMPLO", "text", "Rua Exemplo, 100")}
-        <div class='form-row'>${campoCliente("city", "CIDADE DE EXEMPLO")}
+        ${campoCliente("cep", "CEP", "text", "00000-000")}
+        ${campoCliente("address", "ENDEREÇO", "text", "Rua, número e complemento")}
+        <div class='form-row'>${campoCliente("city", "CIDADE")}
           <div class='field'>
 <label for='cliente-state'>ESTADO</label>
             <select id='cliente-state' name='state' required aria-describedby='cliente-state-erro'>
@@ -973,10 +944,10 @@ function telaCheckout() {
 </small>
           </div>
         </div>
-        <div class='notice'>Envio padrão demonstrativo · ${freteCentavos() ? precoFormatado(freteCentavos()) : "Grátis"}<br>Nenhuma entrega será realizada.</div>
+        <div class='notice'>Envio padrão · ${freteCentavos() ? precoFormatado(freteCentavos()) : "Grátis"}</div>
         <label class='checkbox terms-label'>
 <input name='terms' type='checkbox' required ${compra.terms ? "checked" : ""} aria-describedby='terms-erro'>
-<span>Li os <a class='text-link' href='#/termos'>Termos de Uso</a> e entendi que esta compra é simulada.</span>
+<span>Li e aceito os <a class='text-link' href='#/termos'>Termos de Uso</a>.</span>
 </label>
         <small class='field-error' id='terms-erro' data-erro='terms'>
 </small>
@@ -985,24 +956,12 @@ function telaCheckout() {
     </div>
   </section>`;
 }
-function campoCartao(nome, titulo, exemplo, maximo) {
-  return `<div class='field'>
-<label for='cartao-${nome}'>${titulo}</label>
-    <input id='cartao-${nome}' name='${nome}' value='' placeholder='${exemplo}' required maxlength='${maximo}' autocomplete='off' aria-describedby='cartao-${nome}-erro'>
-    <small class='field-error' id='cartao-${nome}-erro' data-erro='${nome}'>
-</small>
-  </div>`;
-}
 /* Monta somente os campos da forma de pagamento selecionada. */
 function camposPagamento() {
   if (compra.payment.startsWith("Cartão")) {
     const credito = compra.payment === "Cartão de crédito";
-    return `<h3>${credito ? "Crédito" : "Débito"} demonstrativo</h3>
-      <p class='fine'>Use somente o número 0000 0000 0000 0000 e o CVV 000. Não há validação bancária.</p>
-      <button type='button' class='btn small outline' data-action='fill-card-example'>USAR CARTÃO FICTÍCIO</button>
-      ${campoCartao("numero", "NÚMERO DO CARTÃO FICTÍCIO", "0000 0000 0000 0000", 19)}
-      ${campoCartao("nome", "NOME FICTÍCIO NO CARTÃO", "CLIENTE DEMO", 60)}
-      <div class='form-row'>${campoCartao("validade", "VALIDADE FICTÍCIA (MM/AA)", "12/30", 5)}${campoCartao("cvv", "CVV FICTÍCIO", "000", 3)}</div>
+    return `<h3>Cartão de ${credito ? "crédito" : "débito"}</h3>
+      <p class='fine'>Pagamento por cartão ainda não habilitado. Dados bancários não são solicitados nesta página.</p>
       ${
         credito
           ? `<div class='field'>
@@ -1021,33 +980,30 @@ function camposPagamento() {
         <p class='fine' id='valor-parcelas' aria-live='polite'>${descreverParcelas(totalCentavos(), compra.parcelas)}</p>
         <small class='fine'>Eventuais centavos de diferença são ajustados na última parcela. A soma corresponde ao total.</small>
       </div>`
-          : `<p class='fine'>Pagamento à vista: ${precoFormatado(totalCentavos())} · simulação sem débito.</p>`
+          : `<p class='fine'>Valor à vista: ${precoFormatado(totalCentavos())}.</p>`
       }`;
   }
   if (compra.payment === "PIX") {
-    return `<h3>PIX simulado</h3>
-      <img src='img/qr-demo.svg' class='pix-qr' width='180' height='210' alt='Desenho ilustrativo de QR Code: demonstração sem valor de pagamento'>
-      <label for='pix-code'>CÓDIGO COPIA E COLA FICTÍCIO</label>
-      <textarea id='pix-code' rows='3' readonly>${criarCodigoPix(totalCentavos())}</textarea>
-      <button type='button' class='btn outline full' data-action='copy-pix'>COPIAR CÓDIGO FICTÍCIO</button>
-      <p class='fine'>O desenho e o código não fazem pagamentos. Não abra seu aplicativo bancário. Continue para revisar o pedido simulado.</p>`;
+    return `<h3>Pix</h3>
+      <img src='img/pix-qrcode.svg' class='pix-qr' width='240' height='240' alt='Imagem ilustrativa de QR Code para a área do Pix'>
+      <p class='fine pix-status'>QR Code ilustrativo. O recebimento por Pix ainda não está habilitado.</p>`;
   }
-  return `<h3>Boleto demonstrativo</h3>
-<p class='fine'>Esta opção foi preservada do projeto original. Nenhum boleto é emitido e não há código de barras para pagamento.</p>`;
+  return `<h3>Boleto</h3>
+<p class='fine'>A emissão de boletos ainda não está habilitada.</p>`;
 }
 /* Apresenta radios de débito, crédito, PIX e a opção de boleto preservada. */
 function telaPagamento() {
   if (!carrinho.length) return renderizarCarrinho();
   return `<section class='container'>${etapasCompra(2)}${caminhoPagina("Pagamento")}
     <div class='page-intro'>
-<h1>Escolha como simular.</h1>
-<p>Débito, crédito com parcelamento, PIX ou boleto demonstrativo.</p>
+<h1>Escolha a forma de pagamento.</h1>
+<p>Confira as opções e revise seu pedido.</p>
 </div>
     <div class='cart-layout'>
 <form id='payment-form' class='checkout-content' novalidate autocomplete='off'>
       <div class='notice'>
-<strong>SIMULAÇÃO · NÃO DIGITE DADOS BANCÁRIOS REAIS</strong>
-<br>Nenhum campo é enviado a um servidor. Os dados do cartão não são salvos.</div>
+<strong>Pagamento pendente de ativação</strong>
+<br>Você pode salvar seu pedido neste dispositivo. Nenhuma cobrança é processada nesta página.</div>
       <div class='form-errors' role='alert' hidden>
 </div>
       <fieldset class='payment-methods'>
@@ -1061,7 +1017,7 @@ function telaPagamento() {
           )
           .join("")}
       </fieldset>
-      <div class='payment-demo' id='payment-info'>${camposPagamento()}</div>
+      <div class='payment-details' id='payment-info'>${camposPagamento()}</div>
       <button class='btn full' type='submit'>REVISAR PEDIDO — ${precoFormatado(totalCentavos())}</button>
       <a class='text-link back-link' href='#/checkout'>← Voltar à identificação e entrega</a>
     </form>${resumoPedido(false)}</div>
@@ -1071,20 +1027,20 @@ function atualizarResumoPagamento() {
   const resumo = selecionar(".order-summary");
   if (resumo) resumo.outerHTML = resumoPedido(false);
 }
-/* Permite conferir os dados fictícios antes de concluir a simulação. */
+/* Permite revisar os dados e salvar o pedido como pendente. */
 function telaRevisao() {
   if (!carrinho.length) return renderizarCarrinho();
   return `<section class='container'>${etapasCompra(3)}
     <div class='page-intro'>
 <span class='eyebrow'>ÚLTIMA ETAPA</span>
 <h1>Confira cada detalhe.</h1>
-<p>Seu pedido está pronto para a simulação.</p>
+<p>Seu pedido está pronto para ser salvo.</p>
 </div>
     <div class='cart-layout'>
 <div class='checkout-content'>
       <section class='detail-section'>
 <h2>Identificação</h2>
-<p>${escaparHtml(compra.name)}<br>${escaparHtml(compra.email)}<br>Telefone fictício: ${escaparHtml(compra.phone)}<br>CPF fictício: ${escaparHtml(compra.cpf)}</p>
+<p>${escaparHtml(compra.name)}<br>${escaparHtml(compra.email)}<br>Telefone: ${escaparHtml(compra.phone)}<br>CPF: ${escaparHtml(compra.cpf)}</p>
 <a class='text-link' href='#/checkout'>Editar identificação</a>
 </section>
       <section class='detail-section'>
@@ -1094,11 +1050,11 @@ function telaRevisao() {
 </section>
       <section class='detail-section'>
 <h2>Pagamento</h2>
-<p>${compra.payment} · simulado<br>${compra.payment === "Cartão de crédito" ? descreverParcelas(totalCentavos(), compra.parcelas) : precoFormatado(totalCentavos()) + " à vista"}<br>Sem cobrança real.</p>
+<p>${compra.payment}<br>${compra.payment === "Cartão de crédito" ? descreverParcelas(totalCentavos(), compra.parcelas) : precoFormatado(totalCentavos()) + " à vista"}<br>Pagamento pendente de ativação.</p>
 <a class='text-link' href='#/pagamento'>Alterar pagamento</a>
 </section>
-      <div class='notice'>Ao confirmar, você conclui uma demonstração acadêmica. Nenhum pagamento, pedido comercial ou envio será realizado.</div>
-      <button class='btn full' data-action='confirm-order'>CONFIRMAR PEDIDO SIMULADO</button>
+      <div class='notice'>O pedido será salvo neste dispositivo com pagamento pendente.</div>
+      <button class='btn full' data-action='confirm-order'>SALVAR PEDIDO</button>
       <a href='#/sacola' class='text-link back-link'>← Voltar à sacola</a>
     </div>${resumoPedido(false, true)}</div>
   </section>`;
@@ -1118,7 +1074,7 @@ function confirmarPedido() {
   }
   // O pedido salva apenas produtos e valores. Não guarda contatos, endereço ou cartão.
   ultimoPedido = {
-    id: "LE-DEMO-" + Date.now().toString().slice(-8),
+    id: "LE-" + Date.now().toString().slice(-8),
     items: carrinho.map((item) => ({
       ...item,
       precoCentavos: buscarProduto(item.id).precoCentavos,
@@ -1138,20 +1094,20 @@ function confirmarPedido() {
   salvarEstado();
   location.hash = "/confirmacao";
 }
-/* Recupera o último pedido demonstrativo e mostra forma de pagamento e valores. */
+/* Recupera o último pedido salvo, com o pagamento ainda pendente. */
 function telaConfirmacao() {
   if (!ultimoPedido)
     return `<div class='empty'>
 <h1>Seu ritual está por começar.</h1>
-<p>Simule um pedido para ver a confirmação aqui.</p>
+<p>Adicione cuidados à sacola para preparar seu pedido.</p>
 <a class='btn' href='#/catalogo'>EXPLORAR COLEÇÃO</a>
 </div>`;
   return `<div class='container'>${etapasCompra(4)}<section class='confirmation'>
     <div class='check'>✓</div>
-<span class='eyebrow'>SIMULAÇÃO CONCLUÍDA</span>
+<span class='eyebrow'>PEDIDO SALVO</span>
     <h1>Seu ritual começa aqui.</h1>
 <p>Obrigada por explorar o universo Lumière Élevée.</p>
-    <p class='fine'>Pedido demonstrativo ${escaparHtml(ultimoPedido.id)}<br>Nenhuma cobrança, envio ou e-mail foi realizado.</p>
+    <p class='fine'>Pedido ${escaparHtml(ultimoPedido.id)}<br>Pagamento pendente. Revisão salva neste dispositivo.</p>
     <div class='order-summary'>
 <h2>Seu ritual</h2>
       ${ultimoPedido.items
@@ -1171,28 +1127,15 @@ function telaConfirmacao() {
 <span>− ${precoFormatado(ultimoPedido.descontoCentavos || 0)}</span>
 </div>
       <div class='summary-line total'>
-<span>Total simulado</span>
+<span>Total</span>
 <span>${precoFormatado(ultimoPedido.total)}</span>
 </div>
-      <p class='fine'>${escaparHtml(ultimoPedido.payment)} · ${ultimoPedido.payment === "Cartão de crédito" ? descreverParcelas(ultimoPedido.total, ultimoPedido.parcelas) : "à vista"} · demonstrativo</p>
+      <p class='fine'>${escaparHtml(ultimoPedido.payment)} · ${ultimoPedido.payment === "Cartão de crédito" ? descreverParcelas(ultimoPedido.total, ultimoPedido.parcelas) : "à vista"} · pagamento pendente</p>
     </div>
     <a class='btn' href='#/catalogo'>CONTINUAR EXPLORANDO</a>
 <a href='#/conta' class='text-link back-link'>Minha conta</a>
   </section>
 </div>`;
-}
-async function copiarPix() {
-  const campo = selecionar("#pix-code");
-  try {
-    await navigator.clipboard.writeText(campo.value);
-    avisar("Código fictício copiado. Ele não permite pagamentos.");
-  } catch {
-    campo.focus();
-    campo.select();
-    avisar(
-      "Código selecionado. Pressione Ctrl+C ou use a opção Copiar do celular.",
-    );
-  }
 }
 const perguntasQuiz = [
   [
@@ -1260,66 +1203,48 @@ function telaArtigo(id) {
     ativos: "Glossário de Ingredientes",
   };
   return `<article class='container article'>${caminhoPagina("The Beauty Lab")}<span class='eyebrow'>THE BEAUTY LAB / ${id === "ativos" ? "ATIVOS" : "CUIDADOS"}</span>
-<h1>${titles[id] || titles.rotina}</h1>${imagem(id === "ativos" ? "creme" : "serum", "Detalhe de produto Lumière Élevée")}<p>O autocuidado começa com uma pausa. Conheça os passos e os ingredientes apresentados na coleção conceitual Lumière Élevée.</p>${
+<h1>${titles[id] || titles.rotina}</h1>${imagem(id === "ativos" ? "creme" : "serum", "Detalhe de produto Lumière Élevée")}<p>O autocuidado começa com uma pausa. Conheça os passos e os ingredientes apresentados na coleção Lumière Élevée.</p>${
     id === "ativos"
       ? produtos
           .slice(0, 4)
           .map(
             (p) => `<h2>${p.actives[0]}</h2>
-<p>Ativo apresentado no projeto de ${p.name}. Explore a página do produto para conhecer a proposta da fórmula.</p>
+<p>Ativo presente na descrição de ${p.name}. Explore a página do produto para conhecer os detalhes da fórmula.</p>
 <a href='#/produto/${p.id}' class='text-link'>Conhecer ${p.name} →</a>`,
           )
           .join("")
       : `<h2>1. Comece pela limpeza</h2>
 <p>Conheça o Bálsamo Opaline, o primeiro passo do ritual da coleção.</p>
 <h2>2. Explore o seu sérum</h2>
-<p>O Sérum Lumière é a proposta de luminosidade do projeto. Confira seus ativos na página do produto.</p>
+<p>Conheça o Sérum Lumière e confira seus ativos na página do produto.</p>
 <h2>3. Reserve um momento para hidratar</h2>
 <p>Explore a textura nutritiva do Crème Absolue.</p>
 <h2>4. Complete o cuidado diurno</h2>
 <p>Conheça a proposta de proteção da linha Escudo Solar Invisível.</p>
 <h2>5. Faça do cuidado um ritual</h2>
-<p>Salve seus favoritos e organize sua seleção em “Minha Rotina”. As informações são ilustrativas do projeto; a rotina de cuidados pessoais deve considerar as orientações dos produtos e de um profissional.</p>`
+<p>Salve seus favoritos e organize sua seleção em “Minha Rotina”. A rotina de cuidados pessoais deve considerar as orientações das embalagens e suas necessidades.</p>`
   }<a class='btn' href='#/catalogo' style='margin-top:30px'>EXPLORAR COLEÇÃO</a>
 </article>`;
 }
 function telaMaison() {
   return `<article class='container article'>${caminhoPagina("A Maison")}<span class='eyebrow'>NOSSA ESSÊNCIA</span>
 <h1>O cuidado diário como uma forma de arte.</h1>
-<p>Lumière Élevée é um projeto de skincare de luxo que aproxima ciência, sensorialidade e atenção aos detalhes.</p>${imagem("ritual", "A coleção Lumière Élevée")}<h2>Seu ritual, sua pele, seu tempo.</h2>
+<p>Lumière Élevée é um universo de skincare de luxo que aproxima ciência, sensorialidade e atenção aos detalhes.</p>${imagem("ritual", "A coleção Lumière Élevée")}<h2>Seu ritual, sua pele, seu tempo.</h2>
 <p>Uma identidade em off-white, verde-sálvia e dourado. Texturas, tipografia e imagens convidam a desacelerar e transformar gestos cotidianos em um momento seu.</p>
 <h2 id='sustentabilidade'>Cuidado com cada detalhe.</h2>
-<p>Embalagens e fórmulas fazem parte do conceito visual da coleção. As propostas de sustentabilidade e composição deverão ser validadas no desenvolvimento dos produtos.</p>
+<p>Conheça os detalhes de cada cuidado e consulte as informações de composição e uso na embalagem.</p>
 <a class='btn' href='#/colecoes' style='margin-top:25px'>CONHEÇA A COLEÇÃO</a>
 </article>`;
 }
 function telaAjuda() {
   return `<section class='container article'>${caminhoPagina("Atendimento")}<h1>Como podemos ajudar?</h1>
-<p>Conheça os recursos desta experiência privada.</p>
-<details open>
-<summary>Posso comprar os produtos?</summary>
-<p>Esta é uma demonstração do projeto. Você pode simular a compra, mas não há vendas, cobranças ou entregas reais.</p>
-</details>
-<details>
-<summary>Como funciona o frete?</summary>
-<p>Na simulação, compras a partir de R$ 450 têm frete grátis. Abaixo desse valor, o frete demonstrativo é de R$ 25.</p>
-</details>
-<details>
-<summary>Quais são as formas de pagamento?</summary>
-<p>Débito, crédito com 1 a 12 parcelas, PIX e boleto são simulações. Os campos dos cartões aceitam somente o número 0000 0000 0000 0000 e CVV 000. Nenhuma transação é processada.</p>
-</details>
-<details>
-<summary>Como acessar minha conta?</summary>
-<p>Use o e-mail de exemplo preenchido no login e uma senha fictícia com pelo menos seis caracteres, como “lumiere”. A conta existe apenas para explorar os recursos.</p>
-</details>
-<details>
-<summary>Como faço uma troca ou entro em contato?</summary>
-<p>Como não há pedidos comerciais, não há trocas ou atendimento operacional. Os canais oficiais deverão ser definidos antes da abertura comercial.</p>
-</details>
-<details>
-<summary>O que fica salvo neste navegador?</summary>
-<p>Seu tema, sacola, favoritos, rotina e último pedido de exemplo. Use “Redefinir demonstração” no rodapé para limpar esses dados.</p>
-</details>
+<p>Encontre as informações para organizar seu ritual.</p>
+<details open><summary>Como preparar meu pedido?</summary><p>Escolha os produtos, ajuste os itens da sacola e informe os dados de identificação e entrega. A revisão pode ser salva neste dispositivo.</p></details>
+<details><summary>Como funciona o frete?</summary><p>O resumo apresenta frete grátis a partir de R$ 450 e R$ 25 abaixo desse valor. Confira o total na sacola antes de continuar.</p></details>
+<details><summary>Quais são as formas de pagamento?</summary><p>Você pode selecionar débito, crédito com até 12 parcelas, Pix ou boleto. O processamento online ainda não está habilitado; os pedidos salvos ficam com pagamento pendente.</p></details>
+<details><summary>Como acessar minha conta?</summary><p>Informe nome e e-mail para organizar seu perfil neste navegador, acessar os pedidos salvos e encontrar seus cuidados favoritos.</p></details>
+<details><summary>Como entrar em contato?</summary><p>Os canais de atendimento serão disponibilizados nesta página.</p></details>
+<details><summary>Quais dados ficam salvos?</summary><p>Tema, sacola, favoritos, rotina e último pedido ficam neste navegador. O perfil e o rascunho do checkout ficam na sessão. Use “Limpar dados” no rodapé para removê-los.</p></details>
 <a href='#/termos' class='btn outline' style='margin-top:30px'>LER TERMOS DE USO</a>
 </section>`;
 }
@@ -1397,7 +1322,7 @@ function navegar(focus = true) {
       break;
     case "cadastro":
       html = telaLogin(true);
-      title = "Conta demo";
+      title = "Minha conta";
       break;
     case "conta":
       html = telaConta();
@@ -1479,7 +1404,7 @@ function incluirProduto(id, qty = 1, size) {
   salvarEstado();
   avisar(`${p.name} adicionado à sacola.`);
 }
-function entrarContaDemo(name = "Isabella", email = "isabella@example.com") {
+function salvarPerfil(name = "Cliente", email = "") {
   usuario = {
     name,
     email,
@@ -1489,7 +1414,7 @@ function entrarContaDemo(name = "Isabella", email = "isabella@example.com") {
   } catch {}
   location.hash = "/conta";
   if (location.hash === "#/conta") navegar();
-  avisar("Você entrou na conta demonstrativa.");
+  avisar("Perfil disponível nesta sessão.");
 }
 document.addEventListener("click", (e) => {
   const link = e.target.closest("a[href]");
@@ -1618,39 +1543,19 @@ document.addEventListener("click", (e) => {
     avisar("Os 3 produtos do Ritual Essencial foram adicionados.");
   } else if (a === "login-tab")
     location.hash = b.dataset.tab === "cadastro" ? "/cadastro" : "/login";
-  else if (a === "password") {
-    const p = selecionar("#demo-password");
-    p.type = p.type === "password" ? "text" : "password";
-    b.textContent = p.type === "password" ? "Mostrar" : "Ocultar";
-    b.setAttribute(
-      "aria-label",
-      `${p.type === "password" ? "Mostrar" : "Ocultar"} senha`,
-    );
-  } else if (a === "recover")
-    abrirModal(
-      "Recuperar acesso",
-      `<p>Este login é demonstrativo. Não existe uma senha cadastrada ou envio de recuperação.</p>
-<p class='fine'>Use o e-mail de exemplo e a senha fictícia “lumiere” para entrar.</p>
-<button class='btn full' data-action='close-modal'>VOLTAR AO LOGIN</button>`,
-    );
-  else if (a === "social")
-    entrarContaDemo(
-      "Isabella",
-      `${b.dataset.provider.toLowerCase()}-demo@example.com`,
-    );
   else if (a === "logout") {
     usuario = null;
     sessionStorage.removeItem("le_demo_user");
     location.hash = "/login";
-    avisar("Você saiu da conta demonstrativa.");
+    avisar("Você saiu do seu perfil.");
   } else if (a === "account-tab") {
     abaConta = b.dataset.tab;
     navegar(false);
   } else if (a === "coupon-rules")
     abrirModal(
       "Regras do cupom",
-      `<p>Use <strong>LUMIERE10</strong> para simular 10% de desconto sobre os produtos.</p>
-<p class='fine'>Cupom ilustrativo, sem valor comercial. Não altera o frete.</p>
+      `<p>Use <strong>LUMIERE10</strong> para aplicar 10% de desconto sobre os produtos.</p>
+<p class='fine'>O desconto vale para os produtos e não altera o frete.</p>
 <button class='btn full' data-action='close-modal'>ENTENDI</button>`,
     );
   else if (a === "confirm-order") confirmarPedido();
@@ -1667,9 +1572,9 @@ document.addEventListener("click", (e) => {
     navegar(false);
   } else if (a === "reset")
     abrirModal(
-      "Redefinir demonstração",
-      `<p>Isso limpa sacola, favoritos, rotina, conta demo e último pedido salvo neste navegador. O tema escolhido será preservado.</p>
-<button class='btn full' data-action='reset-confirm'>LIMPAR DADOS DEMONSTRATIVOS</button>
+      "Limpar dados",
+      `<p>Isso limpa sacola, favoritos, rotina, perfil e último pedido salvo neste navegador. O tema escolhido será preservado.</p>
+<button class='btn full' data-action='reset-confirm'>LIMPAR DADOS</button>
 <button class='btn outline full' style='margin-top:10px' data-action='close-modal'>CANCELAR</button>`,
     );
   else if (a === "reset-confirm") {
@@ -1702,7 +1607,7 @@ document.addEventListener("click", (e) => {
     fecharModal();
     location.hash = "/";
     navegar();
-    avisar("Dados demonstrativos removidos.");
+    avisar("Dados locais removidos.");
   }
 });
 document.addEventListener("submit", (e) => {
@@ -1716,21 +1621,17 @@ document.addEventListener("submit", (e) => {
     const q = new FormData(f).get("q");
     fecharModal();
     location.hash = "/catalogo?q=" + encodeURIComponent(q);
-  } else if (f.id === "newsletter-form") {
-    e.preventDefault();
-    f.reset();
-    avisar("Inscrição simulada. Nenhum e-mail foi salvo ou enviado.");
   } else if (f.id === "login-form") {
     e.preventDefault();
     const d = new FormData(f);
-    entrarContaDemo(
-      String(d.get("name") || "Isabella").trim() || "Isabella",
+    salvarPerfil(
+      String(d.get("name") || "Cliente").trim() || "Cliente",
       String(d.get("email")),
     );
     f.reset();
   } else if (f.id === "profile-form") {
     e.preventDefault();
-    usuario.name = String(new FormData(f).get("name")).trim() || "Isabella";
+    usuario.name = String(new FormData(f).get("name")).trim() || "Cliente";
     sessionStorage.setItem("le_demo_user", JSON.stringify(usuario));
     navegar(false);
     avisar("Nome de exibição atualizado nesta sessão.");
@@ -1743,16 +1644,7 @@ document.addEventListener("submit", (e) => {
     }
   } else if (f.id === "payment-form") {
     e.preventDefault();
-    const dados = new FormData(f);
-    let erros = {};
-    if (compra.payment.startsWith("Cartão"))
-      erros = validarCartao({
-        numero: String(dados.get("numero") || ""),
-        nome: String(dados.get("nome") || ""),
-        validade: String(dados.get("validade") || ""),
-        cvv: String(dados.get("cvv") || ""),
-      });
-    if (mostrarErrosFormulario(f, erros)) {
+    if (metodosPagamento.includes(compra.payment) && mostrarErrosFormulario(f, {})) {
       compra.assinaturaValidada = assinaturaDaSacola();
       salvarCheckout();
       location.hash = "/revisao";
@@ -1763,11 +1655,11 @@ document.addEventListener("submit", (e) => {
     if (value === "LUMIERE10") {
       cupomAtivo = true;
       navegar(false);
-      avisar("Cupom demonstrativo aplicado: 10% de desconto.");
+      avisar("Cupom aplicado: 10% de desconto.");
     } else {
       cupomAtivo = false;
       navegar(false);
-      avisar("Cupom não encontrado. Consulte as regras para testar.");
+      avisar("Cupom não encontrado. Consulte as regras do cupom.");
     }
   }
 });
@@ -1799,32 +1691,6 @@ document.addEventListener("change", (evento) => {
   } else if (campo.closest("#checkout-form")) {
     guardarDadosCliente(selecionar("#checkout-form"));
     salvarCheckout();
-  }
-});
-document.addEventListener("click", (evento) => {
-  const botao = evento.target.closest("[data-action]");
-  if (!botao) return;
-  if (botao.dataset.action === "fill-example") {
-    for (const [nome, valor] of Object.entries(exemploCliente))
-      selecionar("#checkout-form").elements[nome].value = valor;
-    guardarDadosCliente(selecionar("#checkout-form"));
-    salvarCheckout();
-    mostrarErrosFormulario(selecionar("#checkout-form"), {});
-    avisar(
-      "Dados fictícios preenchidos. Leia e marque os termos para continuar.",
-    );
-  } else if (botao.dataset.action === "fill-card-example") {
-    const form = selecionar("#payment-form");
-    form.elements.numero.value = "0000 0000 0000 0000";
-    form.elements.nome.value = "CLIENTE DEMO";
-    form.elements.validade.value = "12/30";
-    form.elements.cvv.value = "000";
-    mostrarErrosFormulario(form, {});
-    avisar("Cartão fictício preenchido. Nenhum dado será enviado.");
-  } else if (botao.dataset.action === "copy-pix") copiarPix();
-  else if (botao.dataset.action === "sample-cart") {
-    for (const produto of produtos.slice(0, 3)) incluirProduto(produto.id);
-    navegar(false);
   }
 });
 window.addEventListener("hashchange", () => navegar());

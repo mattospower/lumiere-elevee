@@ -106,7 +106,7 @@ export const produtos = [
       "Durante o dia, complete o ritual com proteção solar.",
     ],
     ingredients:
-      "Composição conceitual do projeto. A formulação final deverá ser confirmada antes da comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações na embalagem.",
   },
   {
     id: "balsamo-opaline",
@@ -135,7 +135,7 @@ export const produtos = [
       "Continue com os próximos passos da sua rotina.",
     ],
     ingredients:
-      "Composição conceitual do projeto. A formulação final deverá ser confirmada antes da comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações na embalagem.",
   },
   {
     id: "escudo-solar-invisivel",
@@ -212,20 +212,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Espuma de Seda integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Limpeza facial delicada. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Espuma de Seda integra a coleção Lumière Élevée. Limpeza facial delicada.",
     actives: ["LIMPEZA"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "agua-micelar-purete",
@@ -242,20 +242,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Água Micelar Pureté integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Solução micelar de limpeza. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Água Micelar Pureté integra a coleção Lumière Élevée. Solução micelar de limpeza.",
     actives: ["CUIDADO DIÁRIO"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "veu-de-agua",
@@ -272,20 +272,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Véu de Água integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Hidratante gel ultraleve. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Véu de Água integra a coleção Lumière Élevée. Hidratante gel ultraleve.",
     actives: ["ÁCIDO HIALURÔNICO"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "elixir-de-ceramidas",
@@ -302,20 +302,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Elixir de Ceramidas integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Cuidado da barreira cutânea. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Elixir de Ceramidas integra a coleção Lumière Élevée. Cuidado da barreira cutânea.",
     actives: ["CERAMIDAS"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "essencia-perolada",
@@ -332,20 +332,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Essência Perolada integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Pré-sérum para o ritual diário. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Essência Perolada integra a coleção Lumière Élevée. Pré-sérum para o ritual diário.",
     actives: ["ESQUALANO"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "oleo-serum-dourado",
@@ -362,20 +362,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Óleo Sérum Dourado integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Óleo facial para o autocuidado. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Óleo Sérum Dourado integra a coleção Lumière Élevée. Óleo facial para o autocuidado.",
     actives: ["ESQUALANO + VIT. E"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "nectar-noturno",
@@ -392,20 +392,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Néctar Noturno integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Creme para o ritual da noite. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Néctar Noturno integra a coleção Lumière Élevée. Creme para o ritual da noite.",
     actives: ["PEPTÍDEOS"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "balsamo-noturno",
@@ -422,20 +422,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Bálsamo Noturno integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Cuidado facial noturno. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Bálsamo Noturno integra a coleção Lumière Élevée. Cuidado facial noturno.",
     actives: ["CENTELLA ASIÁTICA"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "fluido-solar-com-cor",
@@ -452,20 +452,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Fluido Solar com Cor integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Proteção e acabamento uniforme. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Fluido Solar com Cor integra a coleção Lumière Élevée. Proteção e acabamento uniforme.",
     actives: ["FILTROS MINERAIS"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "pos-sol-calmante",
@@ -482,20 +482,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Pós-Sol Calmante integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Cuidado após exposição ao sol. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Pós-Sol Calmante integra a coleção Lumière Élevée. Cuidado após exposição ao sol.",
     actives: ["HIDRATAÇÃO"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "kit-ritual-essencial",
@@ -512,20 +512,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Kit Ritual Essencial integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Bálsamo Opaline + Sérum Lumière + Crème Absolue. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Kit Ritual Essencial integra a coleção Lumière Élevée. Bálsamo Opaline + Sérum Lumière + Crème Absolue.",
     actives: ["RITUAL ESSENCIAL"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "kit-cuidado-diurno",
@@ -542,20 +542,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Kit Cuidado Diurno integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Crème Absolue + Escudo Solar Invisível. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Kit Cuidado Diurno integra a coleção Lumière Élevée. Crème Absolue + Escudo Solar Invisível.",
     actives: ["RITUAL DIURNO"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
   {
     id: "kit-ritual-noturno",
@@ -572,20 +572,20 @@ export const produtos = [
     selected: 0,
     ilustrativo: true,
     description:
-      "Kit Ritual Noturno integra o catálogo conceitual Lumière Élevée para a demonstração acadêmica. Crème Absolue + Ampola Renovadora Noturna. Imagem local ilustrativa; não representa um produto disponível para venda.",
+      "Kit Ritual Noturno integra a coleção Lumière Élevée. Crème Absolue + Ampola Renovadora Noturna.",
     actives: ["RITUAL NOTURNO"],
     benefits: [
-      "Uma proposta para compor o seu ritual",
-      "Identidade visual da coleção Lumière Élevée",
-      "Conteúdo conceitual para demonstração acadêmica",
+      "Um cuidado para compor seu ritual",
+      "Parte da coleção Lumière Élevée",
+      "Um momento dedicado ao autocuidado",
     ],
     usage: [
-      "Explore as informações deste produto conceitual.",
-      "Adicione à sua sacola para testar o processo de compra.",
-      "Os produtos desta demonstração não são comercializados.",
+      "Conheça os detalhes deste cuidado.",
+      "Encontre seu tamanho e adicione à sacola.",
+      "Siga as orientações informadas na embalagem.",
     ],
     ingredients:
-      "Composição conceitual. Fórmula e orientações finais dependem de validação antes de qualquer comercialização.",
+      "Consulte a lista completa de ingredientes e as orientações de uso na embalagem.",
   },
 ];
 
@@ -600,7 +600,7 @@ export const textosLegais = {
       ],
       [
         "2. Cadastro e acesso",
-        "Para comprar ou consultar pedidos, poderá ser necessário criar uma conta. As informações fornecidas devem ser corretas e atualizadas. Senhas são pessoais e não devem ser compartilhadas.",
+        "O perfil permite organizar preferências e consultar os pedidos salvos neste navegador. As informações fornecidas devem ser corretas e atualizadas.",
       ],
       [
         "3. Produtos e informações",

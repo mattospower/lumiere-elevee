@@ -111,7 +111,7 @@ export function descreverParcelas(totalCentavos, quantidade) {
   );
 }
 
-// Mantém pedidos de exemplo da versão anterior e ignora um registro corrompido.
+// Mantém pedidos salvos na versão anterior e ignora um registro corrompido.
 export function restaurarPedido(dados, produtos) {
   if (!dados || !Array.isArray(dados.items) || !dados.items.length) return null;
   const antigo = dados.items.some((item) => item && "price" in item);
@@ -145,7 +145,7 @@ export function restaurarPedido(dados, produtos) {
   const pagamento =
     dados.payment === "Cartão" ? "Cartão de crédito" : dados.payment;
   return {
-    id: String(dados.id || "LE-DEMO-ANTERIOR").slice(0, 60),
+    id: String(dados.id || "LE-ANTERIOR").replace(/^LE-DEMO-/, "LE-").slice(0, 60),
     items: itens,
     total: totalCentavos,
     freteCentavos: Number.isInteger(dados.freteCentavos)
